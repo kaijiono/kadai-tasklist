@@ -6,7 +6,7 @@
 
     <p>{{ $task->content }}</p>
     
-    {!! link_to_route('tasks.edit', 'このタスク編集', ['id' => $task->id]) !!}
+    {!! link_to_route('tasks.edit', 'このタスクの編集', ['id' => $task->id]) !!}
     
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除') !!}
