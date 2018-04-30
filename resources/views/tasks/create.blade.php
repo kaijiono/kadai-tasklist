@@ -2,18 +2,37 @@
 
 @section('content')
 
-<h1>タスク新規作成ページ</h1>
+    <h1>タスク新規作成ページ</h1>
     
-    {!! Form::model($task, ['route' => 'tasks.store']) !!}
+    @if (count($errors) > 0)
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
     
-        {!! Form::label('status', 'ステータス:') !!}
-        {!! Form::text('status') !!}
+    <div class="row">
+        <div class="col-xs-6","col-sm-offset-2 col-sm-8", class="col-md-offset-2 col-md-8",class="col-lg-offset-3 col-lg-6">
+        
+        {!! Form::model($task, ['route' => 'tasks.store']) !!}
 
-        {!! Form::label('content', 'タスク:') !!}
-        {!! Form::text('content') !!}
+                <div class="form-group">
+                    {!! Form::label('task', 'タスク:') !!}
+                    {!! Form::text('content', null, ['class' => 'form-control']) !!}
+                </div>
 
-        {!! Form::submit('投稿') !!}
+                <div class="form-group">
+                    {!! Form::label('status', 'ステータス:') !!}
+                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                </div>
+                
+                
 
-    {!! Form::close() !!}
+                {!! Form::submit('投稿', ['class' => 'btn btn-primary']) !!}
+
+            {!! Form::close() !!}
+    </div>
+</div>
    
 @endsection
