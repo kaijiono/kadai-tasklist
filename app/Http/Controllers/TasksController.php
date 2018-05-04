@@ -19,8 +19,8 @@ class TasksController extends Controller
     {
         $tasks = Task::all();
 
-        return view('tasks.index', [
-            'tasks' => $tasks,
+        return view('users.index', [
+            'users' => $users,
         ]);
     }
     public function show($id)
