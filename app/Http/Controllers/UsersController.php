@@ -24,4 +24,26 @@ class UsersController extends Controller
             'user' => $user,
         ]);
     }
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'content' => 'required|max:255',
+        ]);
+
+        $request->user()->tasks()->create([
+            'content' => $request->content,
+        ]);
+
+        return redirect('/');
+    }
+    public function destroy($id)
+    {
+        $task = \App\Task::find($id);
+
+        if (\Auth::user()->id === $task->user_id) {
+            $task->delete();
+        }
+
+        return redirect()->back();
+    }
 }
