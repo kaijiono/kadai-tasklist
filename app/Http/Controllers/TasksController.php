@@ -19,8 +19,8 @@ class TasksController extends Controller
     {
         $tasks = Task::all();
 
-        return view('users.index', [
-            'users' => $users,
+        return view('tasks.index', [
+            'tasks' => $tasks,
         ]);
     }
     public function show($id)
@@ -46,10 +46,10 @@ class TasksController extends Controller
             'content' => 'required|max:191',
         ]);
         
-        $task = new Task;
-        $task->status = $request->status;
-        $task->content = $request->content;
-        $task->save();
+        $request->user()->tasks()->create([
+            'status' => $request->status,
+            'content' => $request->content,
+        ]);
 
         return redirect('/');
     }
