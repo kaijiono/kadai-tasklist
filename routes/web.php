@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', 'TasksController@index');
-
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // ユーザ登録
