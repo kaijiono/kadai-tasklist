@@ -15,7 +15,7 @@
                  
                  @if (Auth::check())
                     <li>{!! link_to_route('users.index', 'Users') !!}</li>
-                        <li><a href="#">Tasks</a></li>
+                    <li>{!! link_to_route('tasks.index', 'Tasks') !!}</li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
