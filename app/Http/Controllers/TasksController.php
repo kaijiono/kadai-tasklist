@@ -21,20 +21,23 @@ class TasksController extends Controller
         if (\Auth::check()) {
             $user = \Auth::user();
             $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-
+            $user_id = $user->id;
+            
             $data = [
                 'user' => $user,
                 'tasks' => $tasks,
+                'user_id' => $user_id
             ];
             $data += $this->counts($user);
             return view('tasks.index', $data);
+            
         }else {
             return view('welcome');
         }
 }
     public function show($id)
     {
-        Task::where(‘id’, $id)->where(‘user_id’, $user_id)->first();
+        $task = Task::where('id',$id)->first();
 
         return view('tasks.show', [
             'task' => $task,
