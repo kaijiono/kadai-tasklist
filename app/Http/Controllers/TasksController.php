@@ -38,10 +38,15 @@ class TasksController extends Controller
     public function show($id)
     {
         $task = Task::where('id',$id)->first();
-
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+        
+        
+        if(\Auth::user()->id === $task->user_id) {
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
+        } else {
+            return redirect('/');
+        }
     }
     public function create()
     {
@@ -88,8 +93,11 @@ class TasksController extends Controller
     }
     public function destroy($id)
     {
-        $task = Task::find($id);
-        $task->delete();
+        $task = \App\Task::find($id);
+
+        if (\Auth::user()->id === $task->user_id) {
+            $task->delete();
+        }
 
         return redirect('/');
     }
